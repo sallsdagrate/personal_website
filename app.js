@@ -7,7 +7,6 @@
     heroName: document.getElementById("hero-name"),
     heroRole: document.getElementById("hero-role"),
     heroIntro: document.getElementById("hero-intro"),
-    heroStatus: document.getElementById("hero-status"),
     cvButton: document.getElementById("cv-button"),
     emailLink: document.getElementById("email-link"),
     linkedinLink: document.getElementById("linkedin-link"),
@@ -114,7 +113,6 @@
     setText(els.heroName, config.name);
     setText(els.heroRole, config.title);
     setText(els.heroIntro, config.intro);
-    setText(els.heroStatus, config.availabilityLabel);
 
     setLink(els.cvButton, config.cvPath, "Open CV");
     setLink(els.linkedinLink, config.linkedinUrl, "LinkedIn");

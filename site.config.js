@@ -10,7 +10,7 @@ window.SITE_CONFIG = {
   linkedinUrl: "https://www.linkedin.com/in/sumith-salluri/",
   githubUsername: "sallsdagrate",
   githubUrl: "https://github.com/sallsdagrate",
-  themeColor: "#6ec1ff",
+  themeColor: "#ff6a00",
   defaultTheme: "dark",
   cvPath: "./assets/cv/current-cv.pdf",
   cvUpdatedLabel: "Current CV PDF last copied into the site on April 14, 2026.",
