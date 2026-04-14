@@ -1,9 +1,9 @@
 window.SITE_CONFIG = {
   name: "Sumith Salluri",
-  tagline: "Quant systems and machine learning",
-  title: "Quant Developer | Mathematics & Computing",
+  tagline: "Quant systems, trading infrastructure, and machine learning",
+  title: "Quant Developer | Imperial College London",
   intro:
-    "First-class Mathematics & Computing graduate from Imperial College London with a strong foundation in probability, machine learning, and low-latency systems, now building systematic trading infrastructure.",
+    "First-class Mathematics and Computing graduate from Imperial College London with experience across low-latency Rust systems, machine learning, and market-facing engineering.",
   availabilityLabel: "Open to quant and engineering conversations",
   email: "sumithsalluri@gmail.com",
   phone: "+44 7814620977",
@@ -16,11 +16,11 @@ window.SITE_CONFIG = {
   cvUpdatedLabel: "Current CV PDF last copied into the site on April 14, 2026.",
   repoDisplayLimit: 6,
   pinnedRepos: [],
-  focusAreas: ["Rust", "Systematic trading", "Machine learning", "Computer vision"],
+  focusAreas: ["Low-latency systems", "Rust", "Systematic trading", "Machine learning"],
   quickFacts: [
-    { value: "First", label: "Imperial MEng" },
-    { value: "Rust + ML", label: "Current build focus" },
-    { value: "London", label: "Base / UK market" }
+    { value: "Imperial", label: "First-class MEng" },
+    { value: "Ediphy", label: "Quant developer internship" },
+    { value: "London", label: "UK base" }
   ],
   highlights: [
     "Quant Developer Intern at Ediphy Markets, building low-latency Rust infrastructure for fixed income workflows.",

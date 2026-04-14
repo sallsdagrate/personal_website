@@ -8,25 +8,12 @@
     heroRole: document.getElementById("hero-role"),
     heroIntro: document.getElementById("hero-intro"),
     heroStatus: document.getElementById("hero-status"),
+    cvButton: document.getElementById("cv-button"),
     emailLink: document.getElementById("email-link"),
-    phoneLink: document.getElementById("phone-link"),
     linkedinLink: document.getElementById("linkedin-link"),
     githubLink: document.getElementById("github-link"),
-    headerGithub: document.getElementById("header-github"),
-    headerLinkedin: document.getElementById("header-linkedin"),
     projectsProfileLink: document.getElementById("projects-profile-link"),
-    viewCvLink: document.getElementById("view-cv-link"),
-    downloadCvLink: document.getElementById("download-cv-link"),
-    inlineDownloadLink: document.getElementById("inline-download-link"),
-    inlineOpenLink: document.getElementById("inline-open-link"),
-    mobileOpenLink: document.getElementById("mobile-open-link"),
-    mobileDownloadLink: document.getElementById("mobile-download-link"),
-    openPdfButton: document.getElementById("open-pdf-button"),
-    printCvButton: document.getElementById("print-cv-button"),
-    cvFrame: document.getElementById("cv-frame"),
-    cvUpdatedCopy: document.getElementById("cv-updated-copy"),
     projectsList: document.getElementById("projects-list"),
-    highlightsList: document.getElementById("highlights-list"),
     focusPills: document.getElementById("focus-pills"),
     signalGrid: document.getElementById("signal-grid"),
     themeToggle: document.getElementById("theme-toggle")
@@ -42,7 +29,9 @@
       normalized.length === 3
         ? normalized
             .split("")
-            .map((char) => char + char)
+            .map(function (char) {
+              return char + char;
+            })
             .join("")
         : normalized;
 
@@ -84,96 +73,68 @@
     if (label) el.textContent = label;
   }
 
+  function renderFocusAreas() {
+    if (!els.focusPills || !Array.isArray(config.focusAreas)) return;
+
+    els.focusPills.innerHTML = "";
+    config.focusAreas.forEach(function (item) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      els.focusPills.appendChild(li);
+    });
+  }
+
+  function renderQuickFacts() {
+    if (!els.signalGrid || !Array.isArray(config.quickFacts)) return;
+
+    els.signalGrid.innerHTML = "";
+
+    config.quickFacts.forEach(function (fact) {
+      if (!fact || !fact.value || !fact.label) return;
+
+      const article = document.createElement("article");
+      article.className = "signal-card";
+
+      const strong = document.createElement("strong");
+      strong.textContent = fact.value;
+
+      const span = document.createElement("span");
+      span.textContent = fact.label;
+
+      article.append(strong, span);
+      els.signalGrid.appendChild(article);
+    });
+  }
+
   function populateStaticContent() {
     document.title = `${config.name || "CV"} | Resume`;
+
     setText(els.brandName, config.name);
     setText(els.brandTagline, config.tagline);
     setText(els.heroName, config.name);
     setText(els.heroRole, config.title);
     setText(els.heroIntro, config.intro);
     setText(els.heroStatus, config.availabilityLabel);
-    setText(els.cvUpdatedCopy, config.cvUpdatedLabel);
+
+    setLink(els.cvButton, config.cvPath, "Open CV");
+    setLink(els.linkedinLink, config.linkedinUrl, "LinkedIn");
+    setLink(els.githubLink, config.githubUrl, "GitHub");
+    setLink(els.projectsProfileLink, config.githubUrl, "View profile");
 
     if (els.emailLink && config.email) {
       els.emailLink.href = `mailto:${config.email}`;
-      els.emailLink.textContent = config.email;
+      els.emailLink.textContent = "Email";
     }
 
-    if (els.phoneLink && config.phone) {
-      const cleanedPhone = config.phone.replace(/\s+/g, "");
-      els.phoneLink.href = `tel:${cleanedPhone}`;
-      els.phoneLink.textContent = config.phone;
-    }
-
-    setLink(els.linkedinLink, config.linkedinUrl, "Profile");
-    setLink(els.headerLinkedin, config.linkedinUrl);
-    setLink(els.githubLink, config.githubUrl, config.githubUsername);
-    setLink(els.headerGithub, config.githubUrl);
-    setLink(els.projectsProfileLink, config.githubUrl);
-
-    const cvUrl = `${config.cvPath}#view=FitH`;
-    setLink(els.downloadCvLink, config.cvPath);
-    setLink(els.inlineDownloadLink, config.cvPath);
-    setLink(els.inlineOpenLink, config.cvPath, "Open tab");
-    setLink(els.mobileOpenLink, config.cvPath, "Open PDF");
-    setLink(els.mobileDownloadLink, config.cvPath);
-
-    if (els.cvFrame) {
-      els.cvFrame.src = cvUrl;
-    }
-
-    if (els.openPdfButton) {
-      els.openPdfButton.addEventListener("click", function () {
-        window.open(config.cvPath, "_blank", "noopener,noreferrer");
-      });
-    }
-
-    if (els.printCvButton) {
-      els.printCvButton.addEventListener("click", function () {
-        window.open(config.cvPath, "_blank", "noopener,noreferrer");
-      });
-    }
-
-    if (els.highlightsList && Array.isArray(config.highlights)) {
-      els.highlightsList.innerHTML = "";
-      config.highlights.forEach(function (item) {
-        const li = document.createElement("li");
-        li.textContent = item;
-        els.highlightsList.appendChild(li);
-      });
-    }
-
-    if (els.focusPills && Array.isArray(config.focusAreas)) {
-      els.focusPills.innerHTML = "";
-      config.focusAreas.forEach(function (item) {
-        const li = document.createElement("li");
-        li.textContent = item;
-        els.focusPills.appendChild(li);
-      });
-    }
-
-    if (els.signalGrid && Array.isArray(config.quickFacts)) {
-      els.signalGrid.innerHTML = "";
-      config.quickFacts.forEach(function (fact) {
-        if (!fact || !fact.value || !fact.label) return;
-        const article = document.createElement("article");
-        article.className = "signal-card";
-
-        const strong = document.createElement("strong");
-        strong.textContent = fact.value;
-
-        const span = document.createElement("span");
-        span.textContent = fact.label;
-
-        article.append(strong, span);
-        els.signalGrid.appendChild(article);
-      });
-    }
+    renderFocusAreas();
+    renderQuickFacts();
   }
 
   function renderStatus(message, className) {
     if (!els.projectsList) return;
+
     els.projectsList.innerHTML = "";
+
     const p = document.createElement("p");
     p.className = className;
     p.textContent = message;
@@ -182,23 +143,26 @@
 
   function sortRepos(repos) {
     const pinned = Array.isArray(config.pinnedRepos) ? config.pinnedRepos : [];
-    const pinnedSet = new Set(pinned.map((name) => name.toLowerCase()));
+    const pinnedSet = new Set(
+      pinned.map(function (name) {
+        return name.toLowerCase();
+      })
+    );
 
-    return repos
-      .slice()
-      .sort(function (a, b) {
-        const aPinned = pinnedSet.has(a.name.toLowerCase());
-        const bPinned = pinnedSet.has(b.name.toLowerCase());
+    return repos.slice().sort(function (a, b) {
+      const aPinned = pinnedSet.has(a.name.toLowerCase());
+      const bPinned = pinnedSet.has(b.name.toLowerCase());
 
-        if (aPinned && !bPinned) return -1;
-        if (!aPinned && bPinned) return 1;
+      if (aPinned && !bPinned) return -1;
+      if (!aPinned && bPinned) return 1;
 
-        return new Date(b.updated_at) - new Date(a.updated_at);
-      });
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
   }
 
   function renderRepos(repos) {
     if (!els.projectsList) return;
+
     els.projectsList.innerHTML = "";
 
     const limit = Number.isFinite(config.repoDisplayLimit) ? config.repoDisplayLimit : 6;
@@ -217,38 +181,37 @@
       const article = document.createElement("article");
       article.className = "project-card";
 
+      const heading = document.createElement("div");
+      heading.className = "project-heading";
+
       const title = document.createElement("h3");
-      const link = document.createElement("a");
-      link.href = repo.html_url;
-      link.target = "_blank";
-      link.rel = "noreferrer";
-      link.textContent = repo.name;
-      title.appendChild(link);
+      const titleLink = document.createElement("a");
+      titleLink.href = repo.html_url;
+      titleLink.target = "_blank";
+      titleLink.rel = "noreferrer";
+      titleLink.textContent = repo.name;
+      title.appendChild(titleLink);
 
-      const description = document.createElement("p");
-      description.textContent = repo.description || "Public repository with no description provided.";
-
-      const meta = document.createElement("div");
+      const meta = document.createElement("p");
       meta.className = "project-meta";
 
-      if (repo.language) {
-        const language = document.createElement("span");
-        language.className = "project-language";
-        language.textContent = repo.language;
-        meta.appendChild(language);
-      }
+      const metaParts = [];
+      if (repo.language) metaParts.push(repo.language);
+      metaParts.push(`${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}`);
+      metaParts.push(
+        `Updated ${new Date(repo.updated_at).toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        })}`
+      );
+      meta.textContent = metaParts.join("  •  ");
 
-      const stars = document.createElement("span");
-      stars.textContent = `${repo.stargazers_count} star${repo.stargazers_count === 1 ? "" : "s"}`;
-      meta.appendChild(stars);
+      heading.append(title, meta);
 
-      const updated = document.createElement("span");
-      updated.textContent = `Updated ${new Date(repo.updated_at).toLocaleDateString("en-GB", {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      })}`;
-      meta.appendChild(updated);
+      const description = document.createElement("p");
+      description.className = "project-description";
+      description.textContent = repo.description || "Public repository with no description provided.";
 
       const footer = document.createElement("div");
       footer.className = "project-footer";
@@ -259,9 +222,9 @@
       repoLink.rel = "noreferrer";
       repoLink.textContent = "Repository";
 
-      footer.append(meta, repoLink);
+      footer.appendChild(repoLink);
 
-      article.append(title, description, footer);
+      article.append(heading, description, footer);
       els.projectsList.appendChild(article);
     });
   }
@@ -289,7 +252,7 @@
       renderRepos(Array.isArray(repos) ? repos : []);
     } catch (error) {
       renderStatus(
-        "Public repositories could not be loaded automatically. Use the GitHub profile link above instead.",
+        "Public repositories could not be loaded automatically. Use the GitHub profile link instead.",
         "error-text"
       );
       console.error(error);

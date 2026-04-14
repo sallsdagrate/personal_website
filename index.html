@@ -6,9 +6,9 @@
     <title>Sumith Salluri | CV</title>
     <meta
       name="description"
-      content="Professional CV wrapper for Sumith Salluri with embedded resume, public GitHub projects, and direct contact links."
+      content="Recruiter-facing personal site for Sumith Salluri with direct CV access and selected public GitHub projects."
     />
-    <meta name="theme-color" content="#5fbff9" />
+    <meta name="theme-color" content="#6ec1ff" />
     <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -25,9 +25,6 @@
 
         <div class="header-actions">
           <a class="header-link" href="#projects">Projects</a>
-          <a class="header-link" href="#cv">CV</a>
-          <a class="header-link" id="header-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="header-link" id="header-linkedin" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
           <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
             <span class="theme-toggle-track">
               <span class="theme-toggle-thumb"></span>
@@ -36,123 +33,52 @@
         </div>
       </header>
 
-      <main id="top" class="main-grid">
-        <aside class="profile-column">
-          <section class="panel hero-panel" data-section="intro">
-            <div class="hero-topline">
-              <p class="eyebrow">Recruiter-ready profile</p>
-              <span class="status-chip" id="hero-status">Open to opportunities</span>
+      <main id="top" class="main-stack">
+        <section class="hero panel">
+          <p class="eyebrow">Recruiter-ready profile</p>
+
+          <div class="hero-copy">
+            <div class="hero-heading">
+              <div>
+                <h1 id="hero-name">Sumith Salluri</h1>
+                <p class="hero-role" id="hero-role">Quant Developer | Mathematics & Computing</p>
+              </div>
+              <span class="availability" id="hero-status">Open to opportunities</span>
             </div>
-            <h1 id="hero-name">Sumith Salluri</h1>
-            <p class="hero-role" id="hero-role">Mathematics & Computing Graduate</p>
+
             <p class="hero-intro" id="hero-intro">
               First-class Mathematics & Computing graduate from Imperial College London with a strong foundation in
-              probability and machine learning and a deep interest in markets.
+              probability, machine learning, and low-latency systems, now building systematic trading infrastructure.
             </p>
 
             <ul class="focus-pills" id="focus-pills"></ul>
+          </div>
 
-            <div class="cta-row">
-              <a class="button button-primary" id="view-cv-link" href="#cv">View CV</a>
-              <a class="button button-secondary" id="download-cv-link" href="#" download>Download PDF</a>
+          <div class="hero-actions">
+            <a class="button button-primary" id="cv-button" href="#" target="_blank" rel="noreferrer">Open CV</a>
+
+            <div class="contact-links">
+              <a id="email-link" href="#">Email</a>
+              <a id="linkedin-link" href="#" target="_blank" rel="noreferrer">LinkedIn</a>
+              <a id="github-link" href="#" target="_blank" rel="noreferrer">GitHub</a>
             </div>
+          </div>
 
-            <div class="cta-row">
-              <button class="button button-ghost" id="open-pdf-button" type="button">Open PDF</button>
-              <button class="button button-ghost" id="print-cv-button" type="button">Print / Save</button>
+          <div class="signal-grid" id="signal-grid"></div>
+        </section>
+
+        <section class="panel projects-panel" id="projects">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Public work</p>
+              <h2>Selected GitHub Projects</h2>
             </div>
+            <a id="projects-profile-link" href="#" target="_blank" rel="noreferrer">View profile</a>
+          </div>
 
-            <dl class="contact-grid">
-              <div>
-                <dt>Email</dt>
-                <dd><a id="email-link" href="#">sumithsalluri@gmail.com</a></dd>
-              </div>
-              <div>
-                <dt>Phone</dt>
-                <dd><a id="phone-link" href="#">+44 7814620977</a></dd>
-              </div>
-              <div>
-                <dt>LinkedIn</dt>
-                <dd><a id="linkedin-link" href="#" target="_blank" rel="noreferrer">Profile</a></dd>
-              </div>
-              <div>
-                <dt>GitHub</dt>
-                <dd><a id="github-link" href="#" target="_blank" rel="noreferrer">sallsdagrate</a></dd>
-              </div>
-            </dl>
-
-            <div class="signal-grid" id="signal-grid"></div>
-          </section>
-
-          <section class="panel highlights-panel" data-section="highlights">
-            <div class="panel-heading">
-              <h2>Snapshot</h2>
-              <span class="panel-badge">Selected strengths</span>
-            </div>
-            <ul class="highlights-list" id="highlights-list"></ul>
-          </section>
-
-          <section class="panel projects-panel" id="projects" data-section="projects">
-            <div class="panel-heading">
-              <h2>Public GitHub Projects</h2>
-              <a id="projects-profile-link" href="#" target="_blank" rel="noreferrer">View all</a>
-            </div>
-            <p class="panel-copy">
-              Public repositories are pulled live from GitHub on page load so this section stays current without manual edits.
-            </p>
-            <div class="projects-list" id="projects-list" aria-live="polite">
-              <p class="status-text">Loading public repositories…</p>
-            </div>
-          </section>
-        </aside>
-
-        <section class="content-column">
-          <section class="panel cv-panel" id="cv" data-section="cv">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Embedded document</p>
-                <h2>Curriculum Vitae</h2>
-              </div>
-              <div class="cv-actions">
-                <a class="button button-secondary" id="inline-download-link" href="#" download>Download</a>
-                <a class="button button-ghost" id="inline-open-link" href="#" target="_blank" rel="noreferrer">Open tab</a>
-              </div>
-            </div>
-
-            <div class="cv-meta">
-              <span id="cv-updated-copy">PDF kept in a stable repo path for fast updates.</span>
-              <span class="accent-dot"></span>
-              <span>GitHub Pages compatible static site</span>
-            </div>
-
-            <div class="pdf-frame-shell">
-              <div class="pdf-shell-head">
-                <span class="pdf-shell-dots">
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                </span>
-                <span class="pdf-shell-label">current-cv.pdf</span>
-              </div>
-              <iframe
-                class="pdf-frame"
-                id="cv-frame"
-                title="Embedded curriculum vitae"
-                loading="lazy"
-              ></iframe>
-            </div>
-
-            <div class="mobile-fallback">
-              <h3>Mobile fallback</h3>
-              <p>
-                If the embedded viewer is limited on your device or browser, use the direct PDF actions instead.
-              </p>
-              <div class="cta-row">
-                <a class="button button-primary" id="mobile-open-link" href="#" target="_blank" rel="noreferrer">Open PDF</a>
-                <a class="button button-secondary" id="mobile-download-link" href="#" download>Download PDF</a>
-              </div>
-            </div>
-          </section>
+          <div class="projects-list" id="projects-list" aria-live="polite">
+            <p class="status-text">Loading public repositories…</p>
+          </div>
         </section>
       </main>
     </div>
